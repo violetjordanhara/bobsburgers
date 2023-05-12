@@ -5,26 +5,30 @@ import Results from "./Results";
 
 // to import individual needed components from react-bootstrap to use
 const Search = () => {
+  const fetchBurger = async () => {
+    await fetch(
+      `https://bobsburgers-api.herokuapp.com/burgerOfTheDay/${search}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data);
+        setPosts(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
   const handleClick = () => {
     console.log(search);
+    fetchBurger();
   };
   const [search, setSearch] = useState("");
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetch("https://bobsburgers-api.herokuapp.com/burgerOfTheDay/1")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setPosts(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  const [posts, setPosts] = useState(null);
 
   return (
     <div>
@@ -41,6 +45,7 @@ const Search = () => {
           <button type="button" onClick={handleClick} className="btn btn-light">
             Search
           </button>
+          <h2>{posts?.name}</h2>
         </div>
       </Container>
       <Results />

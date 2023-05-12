@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 const Results = () => {
   return (
     <Container>
-      <p>results here</p>
+      <p>results here </p>
     </Container>
   );
 };
