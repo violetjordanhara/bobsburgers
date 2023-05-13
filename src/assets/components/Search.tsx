@@ -7,7 +7,8 @@ import Results from "./Results";
 const Search = () => {
   const fetchBurger = async () => {
     await fetch(
-      `https://bobsburgers-api.herokuapp.com/burgerOfTheDay/${search}`
+      //https://bobsburgers-api.herokuapp.com/storeNextDoor?episode=5&&season=6
+      `https://bobsburgers-api.herokuapp.com/burgerOfTheDay?season=${searchSeason}&&episode=${searchEpisode}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -20,14 +21,18 @@ const Search = () => {
       });
   };
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
+  const handleSeasonChange = (e) => {
+    setSearchSeason(e.target.value);
+  };
+  const handleEpisodeChange = (e) => {
+    setSearchEpisode(e.target.value);
   };
   const handleClick = () => {
-    console.log(search);
+    console.log(searchSeason, searchEpisode);
     fetchBurger();
   };
-  const [search, setSearch] = useState("");
+  const [searchSeason, setSearchSeason] = useState("");
+  const [searchEpisode, setSearchEpisode] = useState("");
   const [posts, setPosts] = useState(null);
 
   return (
@@ -36,16 +41,29 @@ const Search = () => {
         <h2>Bob's Burgers search</h2>
         <div className="Input-Group">
           {" "}
+          <span className="input-group-text">Season</span>
           <input
-            value={search}
-            onChange={handleChange}
+            value={searchSeason}
+            onChange={handleSeasonChange}
             className="bg-light text-dark"
             type="text"
-          />
+          ></input>
+          <span className="input-group-text">Episode</span>
+          <input
+            value={searchEpisode}
+            onChange={handleEpisodeChange}
+            className="bg-light text-dark"
+            type="text"
+          ></input>
           <button type="button" onClick={handleClick} className="btn btn-light">
             Search
           </button>
-          <h2>{posts?.name}</h2>
+          <div>
+            Burger of the Day
+            {posts?.forEach((name) => (
+              <p>{name}</p>
+            ))}
+          </div>
         </div>
       </Container>
       <Results />
