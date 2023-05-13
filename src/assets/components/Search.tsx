@@ -12,9 +12,10 @@ const Search = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
         setPosts(data);
-        console.log(data);
+        //console.log(posts[0]?.name);
+        //console logging posts returns the object only when search is clicked twice, but data works
+        console.log(data.map((burger) => burger.name));
       })
       .catch((err) => {
         console.log(err.message);
@@ -31,15 +32,32 @@ const Search = () => {
     console.log(searchSeason, searchEpisode);
     fetchBurger();
   };
+
+  // {posts?.forEach(post => (
+  //   <li key={post.id}>post.name</li>
+  // ))}
+
+  // const listBurger = () => {
+  //   console.log("burger to list");
+  //   if (posts.length == 0) {
+  //     return <p>type a valid episode</p>;
+  //   } else {
+  //     posts.map((post) => {
+  //       <li key={post.id}>post.name</li>;
+  //     });
+  //   }
+  // };
+
   const [searchSeason, setSearchSeason] = useState("");
   const [searchEpisode, setSearchEpisode] = useState("");
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   return (
     <div>
       <Container>
         <h2>Bob's Burgers search</h2>
-        <div className="Input-Group">
+
+        <div className="input-group mb-3">
           {" "}
           <span className="input-group-text">Season</span>
           <input
@@ -48,6 +66,8 @@ const Search = () => {
             className="bg-light text-dark"
             type="text"
           ></input>
+        </div>
+        <div className="input-group mb-3">
           <span className="input-group-text">Episode</span>
           <input
             value={searchEpisode}
@@ -55,18 +75,20 @@ const Search = () => {
             className="bg-light text-dark"
             type="text"
           ></input>
-          <button type="button" onClick={handleClick} className="btn btn-light">
-            Search
-          </button>
+        </div>
+
+        <button type="button" onClick={handleClick} className="btn btn-light">
+          Search
+        </button>
+        <div>
+          <h3>Burger of the Day coming up</h3>
           <div>
-            Burger of the Day
-            {posts?.forEach((name) => (
-              <p>{name}</p>
+            {posts?.map((post) => (
+              <li key={post.id}>{post.name}</li>
             ))}
           </div>
         </div>
       </Container>
-      <Results />
     </div>
   );
 };
