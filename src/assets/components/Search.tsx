@@ -54,35 +54,44 @@ const Search = () => {
 
   return (
     <div>
-      <Container>
-        <h2>Bob's Burgers search</h2>
-
-        <div className="input-group mb-3">
-          {" "}
-          <span className="input-group-text">Season</span>
-          <input
-            value={searchSeason}
-            onChange={handleSeasonChange}
-            className="bg-light text-dark"
-            type="text"
-          ></input>
+      <Container className="bg-light bg-opacity-75 py-5">
+        <h2>Bob's Burgers Burger of the Day</h2>
+        <div className="d-flex flex-row">
+          <div className="p-2">
+            <div className="input-group mb-3">
+              {" "}
+              <span className="input-group-text">Season</span>
+              <input
+                value={searchSeason}
+                onChange={handleSeasonChange}
+                className="bg-light text-dark"
+                type="text"
+              ></input>
+            </div>
+          </div>
+          <div className="p-2">
+            <div className="input-group mb-3">
+              {" "}
+              <span className="input-group-text">Episode</span>
+              <input
+                value={searchEpisode}
+                onChange={handleEpisodeChange}
+                className="bg-light text-dark"
+                type="text"
+              ></input>
+            </div>
+          </div>
         </div>
-        <div className="input-group mb-3">
-          <span className="input-group-text">Episode</span>
-          <input
-            value={searchEpisode}
-            onChange={handleEpisodeChange}
-            className="bg-light text-dark"
-            type="text"
-          ></input>
-        </div>
-
-        <button type="button" onClick={handleClick} className="btn btn-light">
+        <button
+          type="button"
+          onClick={handleClick}
+          className="btn btn-outline-secondary"
+        >
           Search
         </button>
+
         <div>
-          <h3>Burger of the Day coming up</h3>
-          <div>
+          <div className="pt-3">
             {posts?.map((post) => (
               <li key={post.id}>{post.name}</li>
             ))}
