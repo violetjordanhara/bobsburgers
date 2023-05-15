@@ -8,6 +8,7 @@ Bob's Burgers Query page with API integration
 
 ## Live demo
 
+![alt text](https://github.com/violetjordanhara/bobsburgers/blob/main/public/querypreview.png "page preview")
 [Link to live demo](https://violetjordanhara.github.io/bobsburgers/)
 
 ## Tools
