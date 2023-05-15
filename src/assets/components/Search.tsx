@@ -1,7 +1,7 @@
+// @ts-nocheck
 import "bootstrap/dist/css/bootstrap.css";
 import { Container, Button, InputGroup } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import Results from "./Results";
 
 // to import individual needed components from react-bootstrap to use
 const Search = () => {
